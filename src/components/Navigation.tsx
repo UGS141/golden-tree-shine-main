@@ -45,7 +45,7 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/GTlifelogo.JPG" 
+              src="/lovable-uploads/GTlifelogo.png" 
               alt="Golden Tree Life Spaces" 
               className="h-12 w-12 object-contain"
             />
@@ -72,7 +72,7 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button variant="outline" className="btn-primary">
+            <Button variant="outline" className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out">
               Get Quote
             </Button>
             <Button className="btn-accent">

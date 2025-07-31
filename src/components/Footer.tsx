@@ -21,8 +21,12 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="h-10 w-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                
+              <div >
+                <img 
+              src="/lovable-uploads/GTlifelogo.png" 
+              alt="Golden Tree Life Spaces" 
+              className="h-12 w-12 object-contain"
+               />
               </div>
               <div>
                 <h3 className="text-lg font-bold">Golden Tree</h3>

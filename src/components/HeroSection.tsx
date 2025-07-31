@@ -36,12 +36,15 @@ const HeroSection = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-white border-white hover:bg-white hover:text-primary text-lg px-8 py-4"
-              >
-                Get Instant Quote
-              </Button>
+  size="lg"
+  variant="outline"
+  className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
+>
+  Get Instant Quote
+</Button>
+
+
+
             </div>
 
             {/* Trust Indicators */}
