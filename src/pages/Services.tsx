@@ -1,5 +1,6 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ServicesSection from '@/components/ServicesSection';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,6 +15,7 @@ import {
   Check,
   ArrowRight
 } from 'lucide-react';
+
 
 const Services = () => {
   const services = [
@@ -98,55 +100,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <Card 
-                  key={index} 
-                  className={`relative card-hover animate-fade-in group cursor-pointer ${
-                    service.popular ? 'ring-2 ring-primary' : ''
-                  }`}
-                  style={{animationDelay: `${index * 100}ms`}}
-                >
-                  {service.popular && (
-                    <Badge className="absolute -top-3 left-4 bg-primary text-white">
-                      Most Popular
-                    </Badge>
-                  )}
-                  <CardHeader className="text-center pb-4">
-                    <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-8 w-8 text-white" />
-                    </div>
-                    <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                    <p className="text-muted-foreground text-sm">{service.description}</p>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <Check className="h-4 w-4 text-primary" />
-                          <span className="text-sm">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="pt-4 border-t">
-                      <p className="text-2xl font-bold text-primary mb-4">{service.price}</p>
-                      <Button className="w-full btn-primary group">
-                        Get Quote
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Services Section */}
+      <ServicesSection />
 
       {/* Process Section */}
       <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">

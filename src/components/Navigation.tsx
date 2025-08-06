@@ -3,8 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 
+// Add these imports at the top
+import { FreeVisitForm } from './FreeVisitForm';
+import { GetQuoteForm } from './GetQuoteForm';
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [showVisitForm, setShowVisitForm] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -72,13 +78,24 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button variant="outline" className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out">
+            <Button 
+              variant="outline" 
+              className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
+              onClick={() => setShowQuoteForm(true)}
+            >
               Get Quote
             </Button>
-            <Button className="btn-accent">
+            <Button 
+              className="btn-accent"
+              onClick={() => setShowVisitForm(true)}
+            >
               Book Free Visit
             </Button>
           </div>
+
+          {/* Add the forms */}
+          <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
+          <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
 
           {/* Mobile Menu Button */}
           <Button

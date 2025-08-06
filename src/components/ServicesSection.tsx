@@ -10,6 +10,7 @@ import {
   Waves,
   ArrowRight 
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ServicesSection = () => {
   const services = [
@@ -17,43 +18,50 @@ const ServicesSection = () => {
       icon: Sun,
       title: "Solar Rooftop Installations",
       description: "Complete solar panel systems for residential and commercial properties with maximum efficiency.",
-      features: ["25-year warranty", "Grid-tied systems", "Net metering support"]
+      features: ["25-year warranty", "Grid-tied systems", "Net metering support"],
+      path: "/services/RooftopSolar"
     },
     {
       icon: Droplets,
       title: "Solar Water Heaters",
       description: "Energy-efficient water heating solutions using solar technology for year-round hot water.",
-      features: ["Instant hot water", "Low maintenance", "Energy savings up to 80%"]
+      features: ["Instant hot water", "Low maintenance", "Energy savings up to 80%"],
+      path: "/services/SolarWaterHeaters"
     },
     {
       icon: Lightbulb,
       title: "Solar Street Lights",
       description: "Automatic LED street lighting systems powered by solar energy for outdoor spaces.",
-      features: ["Motion sensors", "Weather resistant", "10+ hour backup"]
+      features: ["Motion sensors", "Weather resistant", "10+ hour backup"],
+      path: "/services/SolarStreetLights"
     },
     {
       icon: Battery,
       title: "Inverter Systems",
       description: "Reliable power backup solutions with advanced inverter technology for uninterrupted supply.",
-      features: ["Pure sine wave", "Smart charging", "Multiple capacity options"]
+      features: ["Pure sine wave", "Smart charging", "Multiple capacity options"],
+      path: "/services/SolarInverters"
     },
     {
       icon: Camera,
       title: "CC Cameras",
       description: "Advanced surveillance systems with HD recording and remote monitoring capabilities.",
-      features: ["Night vision", "Mobile app access", "Cloud storage"]
+      features: ["Night vision", "Mobile app access", "Cloud storage"],
+      path: "/services/SolarCCTV"
     },
     {
       icon: Shield,
       title: "Smart Fencing",
       description: "Intelligent security fencing systems with automated alerts and monitoring features.",
-      features: ["Intrusion detection", "Smart alerts", "Weather resistant"]
+      features: ["Intrusion detection", "Smart alerts", "Weather resistant"],
+      path: "/services/SolarFencing"
     },
     {
       icon: Waves,
       title: "Solar Water Pumps",
       description: "Efficient water pumping solutions powered by solar energy for agricultural and domestic use.",
-      features: ["Variable speed", "Low maintenance", "Remote monitoring"]
+      features: ["Variable speed", "Low maintenance", "Remote monitoring"],
+      path: "/services/SolarWaterPumping"
     }
   ];
 
@@ -99,10 +107,12 @@ const ServicesSection = () => {
                     ))}
                   </ul>
                   
-                  <Button variant="outline" className="w-full group">
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to={service.path}>
+                    <Button variant="outline" className="w-full group">
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             );
@@ -111,10 +121,12 @@ const ServicesSection = () => {
 
         {/* CTA Section */}
         <div className="text-center">
-          <Button size="lg" className="btn-primary text-lg px-8 py-4">
-            View All Services
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link to="/services">
+            <Button size="lg" className="btn-primary text-lg px-8 py-4">
+              View All Services
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

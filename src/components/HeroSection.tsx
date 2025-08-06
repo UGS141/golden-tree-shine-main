@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield, Zap, Award } from 'lucide-react';
 import heroImage from '@/assets/hero-solar.jpg';
 
+import { FreeVisitForm } from './FreeVisitForm';
+import { GetQuoteForm } from './GetQuoteForm';
+import { Link } from 'react-router-dom';
+
 const HeroSection = () => {
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [showVisitForm, setShowVisitForm] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -31,20 +39,27 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="btn-accent text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                className="btn-accent text-lg px-8 py-4"
+                onClick={() => setShowVisitForm(true)}
+              >
                 Book Free Site Visit
-                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
-  size="lg"
-  variant="outline"
-  className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
->
-  Get Instant Quote
-</Button>
+                size="lg" 
+                variant="outline" 
+                className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
+                onClick={() => setShowQuoteForm(true)}
+              >
+                Get Instant Quote
+              </Button>
 
-
-
+              {/* Add the forms */}
+              <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
+              <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
+              
+              <ArrowRight className="ml-2 h-5 w-5" />
             </div>
 
             {/* Trust Indicators */}
