@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -23,9 +23,11 @@ All colors MUST be HSL.
     --primary-light: 120 61% 45%;
     --primary-dark: 120 61% 25%;
 
-    /* Gold accent color (#FFD700) */
-    --accent: 51 100% 50%;
+    /* Refined gold accent color */
+    --accent: 45 80% 45%;
     --accent-foreground: 220 13% 13%;
+    --accent-light: 45 80% 55%;
+    --accent-dark: 45 80% 35%;
     --accent-light: 51 100% 60%;
     --accent-dark: 51 100% 40%;
 
@@ -110,11 +112,12 @@ All colors MUST be HSL.
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--border);
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: 'Open Sans', sans-serif;
   }
   
@@ -139,11 +142,19 @@ All colors MUST be HSL.
   }
   
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary-dark shadow-lg transition-all duration-300;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    transition-property: all;
+    transition-duration: 300ms;
   }
   
   .btn-accent {
-    @apply bg-accent text-accent-foreground hover:bg-accent-dark shadow-lg transition-all duration-300;
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    transition-property: all;
+    transition-duration: 300ms;
   }
   
   .hero-gradient {
@@ -151,7 +162,8 @@ All colors MUST be HSL.
   }
   
   .card-hover {
-    @apply transition-all duration-300;
+    transition-property: all;
+    transition-duration: 300ms;
     box-shadow: 0 4px 20px hsl(var(--primary) / 0.1);
   }
   
@@ -166,4 +178,119 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .animate-slideIn {
+    animation: slideIn 0.5s ease-out;
+  }
+
+  .animate-bounceRight {
+    animation: bounceRight 1s infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes bounceRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  .bg-gradient-solar {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  }
+}
+
+@layer components {
+  .bg-gradient-power {
+    @apply bg-gradient-to-r from-amber-500 to-orange-500;
+  }
+  
+  .text-gradient-power {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500;
+  }
+  
+  .shadow-power {
+    @apply shadow-lg shadow-amber-200/50;
+  }
+  
+  .btn-power {
+    @apply bg-gradient-power text-white hover:shadow-power transition-all duration-300;
+  }
+
+  .hero-text-shadow {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  @keyframes scale-in {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes bounceRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+  }
+
+  .animate-fadeIn { animation: fadeIn 1s ease-out; }
+  .animate-slideIn { animation: slideIn 1s ease-out; }
+  .animate-slideUp { animation: slideUp 1s ease-out; }
+  .animate-bounceRight { animation: bounceRight 1s infinite; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
 }

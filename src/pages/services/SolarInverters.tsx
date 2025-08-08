@@ -1,6 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { 
   Zap, 
   Battery, 
@@ -9,11 +12,19 @@ import {
   Wifi,
   Settings,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Bolt,
+  Power,
+  LineChart,
+  Sun
 } from 'lucide-react';
 import inverterImage from '@/assets/solar-inverter.jpg';
 
 const SolarInverters = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const features = [
     { icon: Gauge, title: 'High Efficiency', description: 'Up to 98% conversion efficiency rating' },
     { icon: Wifi, title: 'Smart Monitoring', description: 'Real-time performance tracking and alerts' },
@@ -31,37 +42,45 @@ const SolarInverters = () => {
   ];
 
   const specifications = [
-    { label: 'Power Range', value: '1kW to 100kW' },
-    { label: 'Efficiency', value: 'Up to 98.2%' },
-    { label: 'Input Voltage', value: '150V to 850V DC' },
-    { label: 'Output', value: '230V/400V AC' }
+    { label: 'Power Range', value: '1kW to 100kW', icon: Power },
+    { label: 'Efficiency', value: 'Up to 98.2%', icon: LineChart },
+    { label: 'Input Voltage', value: '150V to 850V DC', icon: Bolt },
+    { label: 'Output', value: '230V/400V AC', icon: Sun }
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen flex flex-col relative">
+      <Navigation />
+      
       {/* Hero Section */}
       <section 
-        className="relative py-32 bg-cover bg-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${inverterImage})` }}
+        className="relative py-32 bg-cover bg-center animate-fadeIn min-h-[90vh] flex items-center"
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url(${inverterImage})`,
+          backgroundAttachment: 'fixed'
+        }}
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl text-white">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-nature rounded-full">
-                <Zap className="h-8 w-8 text-primary-foreground" />
+            <div className="flex items-center space-x-3 mb-6 animate-slideIn">
+              <div className="flex items-center justify-center w-16 h-16 bg-gradient-power rounded-full transform hover:scale-110 transition-transform">
+                <Zap className="h-8 w-8 text-primary-foreground animate-pulse" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold hero-text-shadow font-playfair">
                 Solar Inverters
               </h1>
             </div>
-            <p className="text-xl mb-8 hero-text-shadow leading-relaxed">
+            <p className="text-xl mb-8 hero-text-shadow leading-relaxed animate-slideIn delay-100">
               Our inverters convert DC to AC efficiently and can be connected with existing solar 
               or battery systems, enabling uninterrupted, optimized energy use.
             </p>
             <Link to="/contact">
-              <Button size="lg" className="btn-nature text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="btn-power text-lg px-8 py-4 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all animate-slideIn delay-200"
+              >
                 Book a Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
             </Link>
           </div>
@@ -69,11 +88,11 @@ const SolarInverters = () => {
       </section>
 
       {/* Details Section */}
-      <section className="py-20">
+      <section className="py-24 bg-gradient-to-b from-white to-amber-50 animate-slideUp">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
-              Advanced Solar Inverter Technology
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 font-playfair">
+              Advanced <span className="text-gradient-power">Solar Inverter Technology</span>
             </h2>
             
             <div className="prose prose-lg max-w-none mb-12">
@@ -98,14 +117,20 @@ const SolarInverters = () => {
 
             {/* Specifications */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-              {specifications.map((spec, index) => (
-                <Card key={index} className="text-center hover:shadow-nature transition-all duration-300">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-primary mb-2">{spec.label}</h3>
-                    <p className="text-muted-foreground">{spec.value}</p>
-                  </CardContent>
-                </Card>
-              ))}
+              {specifications.map((spec, index) => {
+                const IconComponent = spec.icon;
+                return (
+                  <Card key={index} className="text-center hover:shadow-power transition-all duration-300 transform hover:-translate-y-2 border-none bg-white/80 backdrop-blur-sm">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-gradient-power rounded-full">
+                        <IconComponent className="h-6 w-6 text-primary-foreground" />
+                      </div>
+                      <h3 className="font-semibold text-primary mb-2">{spec.label}</h3>
+                      <p className="text-muted-foreground">{spec.value}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
 
             {/* Features Grid */}
@@ -113,10 +138,10 @@ const SolarInverters = () => {
               {features.map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
-                  <Card key={index} className="hover:shadow-nature transition-all duration-300">
+                  <Card key={index} className="hover:shadow-power transition-all duration-300 transform hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="flex items-center justify-center w-12 h-12 bg-gradient-nature rounded-full flex-shrink-0">
+                        <div className="flex items-center justify-center w-12 h-12 bg-gradient-power rounded-full flex-shrink-0">
                           <IconComponent className="h-6 w-6 text-primary-foreground" />
                         </div>
                         <div>
@@ -134,16 +159,16 @@ const SolarInverters = () => {
       </section>
 
       {/* Use Cases Section */}
-      <section className="py-20 bg-muted/50">
+      <section className="py-24 bg-gradient-to-b from-amber-50 to-white animate-slideUp">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
-              Versatile Inverter Applications
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-playfair">
+              Versatile <span className="text-gradient-power">Applications</span>
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {useCases.map((useCase, index) => (
-                <div key={index} className="flex items-center space-x-3">
+                <div key={index} className="flex items-center space-x-3 p-4 bg-white/80 rounded-lg hover:shadow-power transition-all duration-300 backdrop-blur-sm transform hover:-translate-y-1">
                   <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
                   <span className="text-lg">{useCase}</span>
                 </div>
@@ -154,30 +179,41 @@ const SolarInverters = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-nature">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 font-playfair">
+      <section className="py-20 bg-gradient-power animate-slideUp relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-amber-500/20 backdrop-blur-sm"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-playfair">
             Maximize Your Solar Investment
           </h2>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Get the most efficient inverter solution for your solar system. 
             Our experts will recommend the perfect inverter for your specific requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
-              <Button size="lg" variant="secondary" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="text-lg px-8 py-4 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              >
                 Get Inverter Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
             </Link>
             <Link to="/projects">
-              <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-foreground text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              >
                 View System Examples
               </Button>
             </Link>
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 interface FreeVisitFormProps {
   open: boolean;
@@ -18,12 +19,24 @@ export function FreeVisitForm({ open, onOpenChange }: FreeVisitFormProps) {
     whatsappNumber: "",
     pincode: "",
     monthlyBill: "Less than ₹1500",
-    type: "Residential" // Added missing type field with default value
+    type: "Residential"
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Form will be handled by Netlify
+  };
+
+  const handleTypeChange = (type: string) => {
+    if (type === "Housing Society" || type === "Commercial") {
+      toast({
+        title: "Under Construction",
+        description: `${type} booking is currently under development. Please try residential booking or contact us directly.`,
+        variant: "default"
+      });
+      return;
+    }
+    setFormData(prev => ({ ...prev, type }));
   };
 
   return (
@@ -34,28 +47,28 @@ export function FreeVisitForm({ open, onOpenChange }: FreeVisitFormProps) {
             Schedule a FREE consultation
           </DialogTitle>
         </DialogHeader>
-        <form name="free-visit" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-4">
+        <form name="free-visit" className="space-y-4" Netlify>
           <input type="hidden" name="form-name" value="free-visit" />
           
           <div className="grid grid-cols-3 gap-4 mb-4">
             <button
-            type="button"
+              type="button"
               className={`py-2 px-4 rounded ${formData.type === "Residential" ? "bg-primary text-white" : "bg-gray-100"}`}
-              onClick={() => setFormData(prev => ({ ...prev, type: "Residential" }))}
+              onClick={() => handleTypeChange("Residential")}
             >
               Residential
             </button>
             <button
               type="button"
               className={`py-2 px-4 rounded ${formData.type === "Housing Society" ? "bg-primary text-white" : "bg-gray-100"}`}
-              onClick={() => setFormData(prev => ({ ...prev, type: "Housing Society" }))}
+              onClick={() => handleTypeChange("Housing Society")}
             >
               Housing Society
             </button>
             <button
               type="button"
               className={`py-2 px-4 rounded ${formData.type === "Commercial" ? "bg-primary text-white" : "bg-gray-100"}`}
-              onClick={() => setFormData(prev => ({ ...prev, type: "Commercial" }))}
+              onClick={() => handleTypeChange("Commercial")}
             >
               Commercial
             </button>

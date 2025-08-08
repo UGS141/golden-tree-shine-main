@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone, Mail } from 'lucide-react';
-
-// Add these imports at the top
 import { FreeVisitForm } from './FreeVisitForm';
 import { GetQuoteForm } from './GetQuoteForm';
+
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,19 +27,27 @@ const Navigation = () => {
     <nav className="bg-background shadow-soft sticky top-0 z-50">
       {/* Top Bar */}
       <div className="bg-primary text-primary-foreground py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <Phone className="h-4 w-4" />
-              <span>+91 98765 43210</span>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
+              <a 
+                href="tel:+919876543210" 
+                className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
+              >
+                <Phone className="h-5 w-5" />
+                <span className="text-base font-medium">+91 98765 43210</span>
+              </a>
+              <a 
+                href="mailto:info@goldentreelifespaces.com" 
+                className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
+              >
+                <Mail className="h-5 w-5" />
+                <span className="text-base font-medium">info@goldentreelifespaces.com</span>
+              </a>
             </div>
-            <div className="flex items-center space-x-1">
-              <Mail className="h-4 w-4" />
-              <span>info@goldentreelifespaces.com</span>
+            <div className="hidden md:block text-sm font-medium">
+              <span>Certified Experts | EMI Available | Quality Materials</span>
             </div>
-          </div>
-          <div className="hidden md:flex space-x-4">
-            <span>Certified Experts | EMI Available | Quality Materials</span>
           </div>
         </div>
       </div>
@@ -57,7 +64,7 @@ const Navigation = () => {
             />
             <div>
               <h1 className="text-xl font-bold text-primary">Golden Tree</h1>
-              <p className="text-sm text-muted-foreground">Life Spaces</p>
+              <p className="text-sm text-muted-foreground">Life Sciences</p>
             </div>
           </Link>
 
@@ -77,31 +84,27 @@ const Navigation = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-3">
+          <div className="hidden lg:flex items-center space-x-4">
             <Button 
               variant="outline" 
-              className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
+              className="bg-white text-yellow-700 border-2 border-yellow-500 hover:bg-yellow-50 hover:text-yellow-800 text-base font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               onClick={() => setShowQuoteForm(true)}
             >
               Get Quote
             </Button>
             <Button 
-              className="btn-accent"
+              className="bg-accent hover:bg-accent/90 text-white text-base font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               onClick={() => setShowVisitForm(true)}
             >
               Book Free Visit
             </Button>
           </div>
 
-          {/* Add the forms */}
-          <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
-          <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
-
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-lg"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -111,13 +114,13 @@ const Navigation = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="lg:hidden bg-background border-t">
-          <div className="container mx-auto px-4 py-4 space-y-4">
+        <div className="lg:hidden bg-background border-t shadow-lg">
+          <div className="container mx-auto px-4 py-6 space-y-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`block py-2 font-medium transition-colors hover:text-primary ${
+                className={`block py-2 text-lg font-medium transition-colors hover:text-primary ${
                   isActive(item.path) ? 'text-primary' : 'text-foreground'
                 }`}
                 onClick={() => setIsOpen(false)}
@@ -125,19 +128,37 @@ const Navigation = () => {
                 {item.label}
               </Link>
             ))}
-            <div className="flex flex-col space-y-2 pt-4">
-              <Button variant="outline" className="btn-primary">
+            <div className="flex flex-col gap-3 pt-4 border-t">
+              <Button 
+                variant="outline" 
+                className="w-full bg-white text-yellow-700 border-2 border-yellow-500 hover:bg-yellow-50 hover:text-yellow-800 text-lg font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                onClick={() => {
+                  setShowQuoteForm(true);
+                  setIsOpen(false);
+                }}
+              >
                 Get Quote
               </Button>
-              <Button className="btn-accent">
+              <Button 
+                className="w-full bg-accent hover:bg-accent/90 text-white text-lg font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                onClick={() => {
+                  setShowVisitForm(true);
+                  setIsOpen(false);
+                }}
+              >
                 Book Free Visit
               </Button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Add Form Components */}
+      <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
+      <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
     </nav>
   );
 };
 
 export default Navigation;
+

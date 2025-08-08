@@ -1,6 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+// Remove duplicate MapPin import since it's already imported in the icons list below
 import { 
   Lightbulb, 
   Battery, 
@@ -9,11 +13,19 @@ import {
   Clock,
   MapPin,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Sun,
+  Shield,
+  Wrench,
+  Award
 } from 'lucide-react';
 import streetLightsImage from '@/assets/solar-street-lights.jpg';
 
 const SolarStreetLights = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const features = [
     { icon: Battery, title: 'Smart Battery Backup', description: 'Up to 3 days of continuous operation' },
     { icon: Zap, title: 'Motion Sensors', description: 'Intelligent brightness control for energy saving' },
@@ -37,39 +49,76 @@ const SolarStreetLights = () => {
     { label: 'Luminous Flux', value: 'Up to 12,000 lumens' }
   ];
 
+  const benefits = [
+    { icon: Sun, title: 'Energy Efficient', description: 'Up to 90% reduction in energy costs' },
+    { icon: Shield, title: 'Weatherproof Design', description: 'Built to withstand extreme conditions' },
+    { icon: Wrench, title: 'Easy Maintenance', description: 'Minimal upkeep required' },
+    { icon: Award, title: 'Quality Assured', description: '10-year performance warranty' }
+  ];
+
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero Section */}
+    <div className="min-h-screen flex flex-col relative">
+      <Navigation />
+      
+      {/* Hero Section with enhanced styling */}
       <section 
-        className="relative py-32 bg-cover bg-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${streetLightsImage})` }}
+        className="relative py-32 bg-cover bg-center bg-fixed animate-fadeIn min-h-[90vh] flex items-center" 
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url(${streetLightsImage})`,
+          backgroundAttachment: 'fixed'
+        }}
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl text-white">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-nature rounded-full">
+            <div className="flex items-center space-x-3 mb-6 animate-slideIn">
+              <div className="flex items-center justify-center w-16 h-16 bg-gradient-nature rounded-full transform hover:scale-110 transition-transform">
                 <Lightbulb className="h-8 w-8 text-primary-foreground" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold hero-text-shadow font-playfair">
                 Solar Street Lights
               </h1>
             </div>
-            <p className="text-xl mb-8 hero-text-shadow leading-relaxed">
+            <p className="text-xl mb-8 hero-text-shadow leading-relaxed animate-slideIn delay-100">
               We offer smart, sensor-based solar street lighting systems that light up streets, 
               campuses, and rural areas with zero grid dependency.
             </p>
             <Link to="/contact">
-              <Button size="lg" className="btn-nature text-lg px-8 py-4 h-auto">
+              <Button size="lg" className="btn-nature text-lg px-8 py-4 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all animate-slideIn delay-200">
                 Book a Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Details Section */}
-      <section className="py-20">
+      {/* Benefits Section - New */}
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50 animate-slideUp">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 font-playfair bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+            Why Choose Our <span className="text-gradient">Solar Street Lights</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
+                <Card key={index} className="text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-none bg-white">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-gradient-nature rounded-full">
+                      <IconComponent className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-4">{benefit.title}</h3>
+                    <p className="text-muted-foreground">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Details Section with enhanced styling */}
+      <section className="py-24 bg-white animate-slideUp">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
@@ -133,8 +182,8 @@ const SolarStreetLights = () => {
         </div>
       </section>
 
-      {/* Use Cases Section */}
-      <section className="py-20 bg-muted/50">
+      {/* Use Cases Section with enhanced styling */}
+      <section className="py-20 bg-muted/50 animate-slideUp">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
@@ -153,9 +202,42 @@ const SolarStreetLights = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-nature">
-        <div className="container mx-auto px-4 text-center">
+      {/* Installation Process - New Section */}
+      <section className="py-24 bg-white animate-slideUp">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 font-playfair">
+            Simple <span className="text-primary">Installation Process</span>
+          </h2>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-nature rounded-full flex items-center justify-center">
+                <span className="text-2xl font-bold text-white">1</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Site Assessment</h3>
+              <p className="text-muted-foreground">We analyze your location and lighting requirements</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-nature rounded-full flex items-center justify-center">
+                <span className="text-2xl font-bold text-white">2</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Quick Installation</h3>
+              <p className="text-muted-foreground">Professional setup with minimal disruption</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-nature rounded-full flex items-center justify-center">
+                <span className="text-2xl font-bold text-white">3</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Ready to Use</h3>
+              <p className="text-muted-foreground">Immediate operation with automatic controls</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section with enhanced styling */}
+      <section className="py-20 bg-gradient-nature animate-slideUp relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 backdrop-blur-sm"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 font-playfair">
             Illuminate Your Space with Solar
           </h2>
@@ -178,6 +260,8 @@ const SolarStreetLights = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

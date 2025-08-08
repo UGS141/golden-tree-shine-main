@@ -36,78 +36,66 @@ const RooftopSolar = () => {
     <div className="min-h-screen">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* Hero Section - Enhanced with better gradient overlay */}
       <section 
-        className="relative py-32 bg-cover bg-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${rooftopImage})` }}
+        className="relative py-32 bg-cover bg-center bg-fixed" // Added bg-fixed for parallax effect
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url(${rooftopImage})`,
+          minHeight: '80vh' // Increased height for better visual impact
+        }}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 h-full flex items-center"> {/* Added flex for vertical centering */}
           <div className="max-w-3xl text-white">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-solar rounded-full">
-                <Home className="h-8 w-8 text-primary-foreground" />
+            <div className="flex items-center space-x-3 mb-6 animate-fadeIn"> {/* Added animation */}
+              <div className="flex items-center justify-center w-20 h-20 bg-gradient-solar rounded-full shadow-lg transform hover:scale-105 transition-transform"> {/* Enhanced icon container */}
+                <Home className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold hero-text-shadow">
+              <h1 className="text-5xl md:text-6xl font-bold hero-text-shadow">
                 Rooftop Solar Systems
               </h1>
             </div>
-            <p className="text-xl mb-8 hero-text-shadow leading-relaxed">
+            <p className="text-xl md:text-2xl mb-8 hero-text-shadow leading-relaxed opacity-90">
               Our rooftop solar systems are designed for homes and buildings to generate clean electricity 
               and reduce monthly bills. With high-efficiency panels and smart inverters, you can power your 
               life with sunlight.
             </p>
             <Link to="/contact">
-              <Button size="lg" className="btn-solar text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="btn-solar text-lg px-8 py-6 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              >
                 Book a Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Details Section */}
-      <section className="py-20">
+      {/* Features Grid - Enhanced with animations and better spacing */}
+      <section className="py-24 bg-gradient-to-b from-white to-secondary/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-              Why Choose Our Rooftop Solar Solutions?
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Why Choose Our <span className="text-gradient">Rooftop Solar</span> Solutions?
             </h2>
             
-            <div className="prose prose-lg max-w-none mb-12">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Transform your rooftop into a power generation station with our premium solar panel systems. 
-                Our rooftop solar installations are engineered to maximize energy production while seamlessly 
-                integrating with your building's architecture.
-              </p>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Using cutting-edge photovoltaic technology, our systems convert sunlight directly into electricity, 
-                providing you with clean, renewable energy that can power your entire property. With net metering 
-                capabilities, you can even sell excess power back to the grid, turning your roof into a revenue-generating asset.
-              </p>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our experienced team handles everything from site assessment and system design to installation and 
-                maintenance, ensuring optimal performance and maximum return on your investment. All installations 
-                come with comprehensive warranties and ongoing support.
-              </p>
-            </div>
-
-            {/* Features Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
               {features.map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
-                  <Card key={index} className="hover:shadow-solar transition-all duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex items-center justify-center w-12 h-12 bg-gradient-solar rounded-full flex-shrink-0">
-                          <IconComponent className="h-6 w-6 text-primary-foreground" />
+                  <Card 
+                    key={index} 
+                    className="hover:shadow-solar transition-all duration-300 transform hover:-translate-y-2 border-none bg-white/80 backdrop-blur-sm"
+                  >
+                    <CardContent className="p-8">
+                      <div className="flex items-start space-x-6">
+                        <div className="flex items-center justify-center w-16 h-16 bg-gradient-solar rounded-xl shadow-lg flex-shrink-0 transform hover:rotate-6 transition-transform">
+                          <IconComponent className="h-8 w-8 text-primary-foreground" />
                         </div>
                         <div>
-                          <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                          <p className="text-muted-foreground">{feature.description}</p>
+                          <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
+                          <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -119,19 +107,22 @@ const RooftopSolar = () => {
         </div>
       </section>
 
-      {/* Use Cases Section */}
-      <section className="py-20 bg-muted/50">
+      {/* Use Cases Section - Enhanced with better visual hierarchy */}
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-              Perfect for Various Applications
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Perfect for <span className="text-gradient">Various Applications</span>
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {useCases.map((useCase, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
-                  <span className="text-lg">{useCase}</span>
+                <div 
+                  key={index} 
+                  className="flex items-center space-x-4 p-4 rounded-lg hover:bg-white/80 transition-all duration-300"
+                >
+                  <CheckCircle className="h-8 w-8 text-primary flex-shrink-0" />
+                  <span className="text-xl">{useCase}</span>
                 </div>
               ))}
             </div>

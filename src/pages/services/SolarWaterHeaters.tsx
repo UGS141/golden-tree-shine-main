@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { 
   Droplets, 
   DollarSign, 
@@ -38,89 +40,83 @@ const SolarWaterHeaters = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
+      <Navigation />
+      
       {/* Hero Section */}
       <section 
-        className="relative py-32 bg-cover bg-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${waterHeaterImage})` }}
+        className="relative py-32 bg-cover bg-center bg-fixed" 
+        style={{ 
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url(${waterHeaterImage})`,
+          minHeight: '80vh'
+        }}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 h-full flex items-center">
           <div className="max-w-3xl text-white">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-nature rounded-full">
-                <Droplets className="h-8 w-8 text-primary-foreground" />
+            <div className="flex items-center space-x-3 mb-6 animate-fadeIn">
+              <div className="flex items-center justify-center w-20 h-20 bg-gradient-solar rounded-full shadow-lg transform hover:scale-105 transition-transform">
+                <Droplets className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold hero-text-shadow font-playfair">
+              <h1 className="text-5xl md:text-6xl font-bold hero-text-shadow">
                 Solar Water Heaters
               </h1>
             </div>
-            <p className="text-xl mb-8 hero-text-shadow leading-relaxed">
+            <p className="text-xl md:text-2xl mb-8 hero-text-shadow leading-relaxed opacity-90">
               Switch to solar water heating and cut down on your electricity or gas costs. 
               Our durable, low-maintenance solar heaters are ideal for households, apartments, and hotels.
             </p>
             <Link to="/contact">
-              <Button size="lg" className="btn-nature text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="btn-solar text-lg px-8 py-6 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              >
                 Book a Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Details Section */}
-      <section className="py-20">
+      {/* Specifications with enhanced styling */}
+      <section className="py-24 bg-gradient-to-b from-white to-secondary/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
-              Efficient Solar Water Heating Solutions
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Advanced <span className="text-gradient">Solar Technology</span>
             </h2>
             
-            <div className="prose prose-lg max-w-none mb-12">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Our solar water heating systems harness the sun's energy to provide hot water for your daily needs. 
-                Using advanced thermal technology, these systems can heat water to temperatures up to 80°C, ensuring 
-                you have hot water available whenever you need it.
-              </p>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                The system consists of solar thermal collectors that absorb sunlight and convert it to heat, 
-                which is then transferred to water through a heat exchanger. With insulated storage tanks and 
-                automatic temperature control, you get consistent performance in all weather conditions.
-              </p>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our installations include backup heating elements for cloudy days, ensuring uninterrupted hot water supply. 
-                All systems come with comprehensive warranties and professional maintenance support.
-              </p>
-            </div>
-
-            {/* Specifications */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
               {specifications.map((spec, index) => (
-                <Card key={index} className="text-center hover:shadow-nature transition-all duration-300">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-primary mb-2">{spec.label}</h3>
-                    <p className="text-muted-foreground">{spec.value}</p>
+                <Card 
+                  key={index} 
+                  className="text-center hover:shadow-solar transition-all duration-300 transform hover:-translate-y-2 border-none bg-white/80 backdrop-blur-sm"
+                >
+                  <CardContent className="p-8">
+                    <h3 className="text-xl font-semibold text-primary mb-3">{spec.label}</h3>
+                    <p className="text-lg text-muted-foreground">{spec.value}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
-            {/* Features Grid */}
+            {/* Features Grid with enhanced styling */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
               {features.map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
-                  <Card key={index} className="hover:shadow-nature transition-all duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex items-center justify-center w-12 h-12 bg-gradient-nature rounded-full flex-shrink-0">
-                          <IconComponent className="h-6 w-6 text-primary-foreground" />
+                  <Card 
+                    key={index} 
+                    className="hover:shadow-solar transition-all duration-300 transform hover:-translate-y-2 border-none bg-white/80 backdrop-blur-sm"
+                  >
+                    <CardContent className="p-8">
+                      <div className="flex items-start space-x-6">
+                        <div className="flex items-center justify-center w-16 h-16 bg-gradient-solar rounded-xl shadow-lg flex-shrink-0 transform hover:rotate-6 transition-transform">
+                          <IconComponent className="h-8 w-8 text-primary-foreground" />
                         </div>
                         <div>
-                          <h3 className="text-xl font-semibold mb-2 font-playfair">{feature.title}</h3>
-                          <p className="text-muted-foreground">{feature.description}</p>
+                          <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
+                          <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -132,19 +128,22 @@ const SolarWaterHeaters = () => {
         </div>
       </section>
 
-      {/* Use Cases Section */}
-      <section className="py-20 bg-muted/50">
+      {/* Use Cases Section with enhanced styling */}
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
-              Perfect for Various Applications
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Perfect for <span className="text-gradient">Various Applications</span>
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {useCases.map((useCase, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
-                  <span className="text-lg">{useCase}</span>
+                <div 
+                  key={index} 
+                  className="flex items-center space-x-4 p-4 rounded-lg hover:bg-white/80 transition-all duration-300"
+                >
+                  <CheckCircle className="h-8 w-8 text-primary flex-shrink-0" />
+                  <span className="text-xl">{useCase}</span>
                 </div>
               ))}
             </div>
@@ -152,31 +151,40 @@ const SolarWaterHeaters = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-nature">
+      {/* CTA Section with enhanced styling */}
+      <section className="py-24 bg-gradient-solar">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 font-playfair">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
             Ready for Unlimited Hot Water?
           </h2>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-12 max-w-3xl mx-auto leading-relaxed">
             Get a customized solar water heating solution for your property. 
             Our experts will assess your hot water needs and recommend the perfect system.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link to="/contact">
-              <Button size="lg" variant="secondary" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="text-lg px-8 py-6 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              >
                 Get Free Assessment
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
             </Link>
             <Link to="/projects">
-              <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-foreground text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white hover:text-foreground text-lg px-8 py-6 h-auto transform hover:-translate-y-1 transition-all"
+              >
                 View Installation Examples
               </Button>
             </Link>
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

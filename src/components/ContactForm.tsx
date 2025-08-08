@@ -132,12 +132,10 @@ const ContactForm = () => {
               </CardHeader>
               <CardContent>
                 <form 
-                  onSubmit={handleSubmit}
-                  data-netlify="true"
-                  name="appointment-booking"
+                  name="contact-form"
                   className="space-y-6"
-                >
-                  <input type="hidden" name="form-name" value="appointment-booking" />
+                 netlify >
+                  <input type="hidden" name="form-name" value="contact-form" />
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -200,30 +198,32 @@ const ContactForm = () => {
                     <label className="block text-sm font-medium text-foreground mb-2">
                       Service Type
                     </label>
-                    <Select name="serviceType" onValueChange={(value) => handleInputChange('serviceType', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select service you're interested in" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {serviceOptions.map((service) => (
-                          <SelectItem key={service} value={service}>
-                            {service}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <select 
+                      name="serviceType" 
+                      className="w-full rounded-md border border-input bg-background px-3 py-2"
+                      value={formData.serviceType}
+                      onChange={(e) => handleInputChange('serviceType', e.target.value)}
+                    >
+                      <option value="">Select service you're interested in</option>
+                      {serviceOptions.map((service) => (
+                        <option key={service} value={service}>
+                          {service}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
                       Message
                     </label>
-                    <Textarea
+                    <textarea
                       name="message"
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
                       placeholder="Tell us about your requirements..."
                       rows={4}
+                      className="w-full rounded-md border border-input bg-background px-3 py-2"
                     />
                   </div>
 
