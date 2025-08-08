@@ -52,7 +52,7 @@ export function GetQuoteForm({ open, onOpenChange }: GetQuoteFormProps) {
 
         {/* Scrollable Form Content */}
         <div className="flex-1 overflow-y-auto px-6 py-4">
-          <form name="get-quote" className="space-y-6" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+          <form name="get-quote" className="space-y-6" method="POST" data-netlify="true" onSubmit={handleSubmit} Netlify>
             <input type="hidden" name="form-name" value="get-quote" />
             
             <div className="space-y-4">

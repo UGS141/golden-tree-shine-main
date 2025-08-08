@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-// Remove duplicate MapPin import since it's already imported in the icons list below
 import { 
   Lightbulb, 
   Battery, 
@@ -17,7 +16,11 @@ import {
   Sun,
   Shield,
   Wrench,
-  Award
+  Award,
+  Ruler,
+  Zap as ZapIcon,
+  Battery as BatteryIcon,
+  Sun as SunIcon
 } from 'lucide-react';
 import streetLightsImage from '@/assets/solar-street-lights.jpg';
 
@@ -43,10 +46,10 @@ const SolarStreetLights = () => {
   ];
 
   const specifications = [
-    { label: 'LED Power', value: '20W to 100W' },
-    { label: 'Solar Panel', value: '60W to 200W' },
-    { label: 'Battery Backup', value: '2-3 Days autonomy' },
-    { label: 'Luminous Flux', value: 'Up to 12,000 lumens' }
+    { icon: Ruler, label: 'Height', value: '6-12 meters' },
+    { icon: ZapIcon, label: 'Power', value: '30-120W' },
+    { icon: BatteryIcon, label: 'Battery', value: '12V/24V Lithium' },
+    { icon: SunIcon, label: 'Panel', value: '50-150W' }
   ];
 
   const benefits = [
@@ -62,28 +65,31 @@ const SolarStreetLights = () => {
       
       {/* Hero Section with enhanced styling */}
       <section 
-        className="relative py-32 bg-cover bg-center bg-fixed animate-fadeIn min-h-[90vh] flex items-center" 
+        className="relative py-32 bg-cover bg-center bg-fixed" 
         style={{ 
           backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url(${streetLightsImage})`,
-          backgroundAttachment: 'fixed'
+          minHeight: '80vh'
         }}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 h-full flex items-center">
           <div className="max-w-3xl text-white">
-            <div className="flex items-center space-x-3 mb-6 animate-slideIn">
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-nature rounded-full transform hover:scale-110 transition-transform">
-                <Lightbulb className="h-8 w-8 text-primary-foreground" />
+            <div className="flex items-center space-x-3 mb-6 animate-fadeIn">
+              <div className="flex items-center justify-center w-20 h-20 bg-gradient-solar rounded-full shadow-lg transform hover:scale-105 transition-transform">
+                <Lightbulb className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold hero-text-shadow font-playfair">
+              <h1 className="text-5xl md:text-6xl font-bold hero-text-shadow">
                 Solar Street Lights
               </h1>
             </div>
-            <p className="text-xl mb-8 hero-text-shadow leading-relaxed animate-slideIn delay-100">
+            <p className="text-xl md:text-2xl mb-8 hero-text-shadow leading-relaxed opacity-90">
               We offer smart, sensor-based solar street lighting systems that light up streets, 
               campuses, and rural areas with zero grid dependency.
             </p>
             <Link to="/contact">
-              <Button size="lg" className="btn-nature text-lg px-8 py-4 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all animate-slideIn delay-200">
+              <Button 
+                size="lg" 
+                className="btn-solar text-lg px-8 py-6 h-auto hover:shadow-xl transform hover:-translate-y-1 transition-all"
+              >
                 Book a Free Consultation
                 <ArrowRight className="ml-2 h-5 w-5 animate-bounceRight" />
               </Button>
@@ -93,22 +99,25 @@ const SolarStreetLights = () => {
       </section>
 
       {/* Benefits Section - New */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50 animate-slideUp">
+      <section className="py-24 bg-gradient-to-b from-white to-secondary/20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 font-playfair bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
             Why Choose Our <span className="text-gradient">Solar Street Lights</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
-                <Card key={index} className="text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-none bg-white">
+                <Card 
+                  key={index} 
+                  className="hover:shadow-solar transition-all duration-300 transform hover:-translate-y-2 border-none bg-white/80 backdrop-blur-sm"
+                >
                   <CardContent className="p-8">
-                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-gradient-nature rounded-full">
-                      <IconComponent className="h-8 w-8 text-white" />
+                    <div className="flex items-center justify-center w-16 h-16 bg-gradient-solar rounded-xl shadow-lg flex-shrink-0 transform hover:rotate-6 transition-transform mb-6 mx-auto">
+                      <IconComponent className="h-8 w-8 text-primary-foreground" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
+                    <h3 className="text-2xl font-semibold mb-3">{benefit.title}</h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed">{benefit.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -117,12 +126,46 @@ const SolarStreetLights = () => {
         </div>
       </section>
 
-      {/* Details Section with enhanced styling */}
+      {/* Features Grid */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Smart <span className="text-gradient">Features</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              {features.map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <Card 
+                    key={index} 
+                    className="hover:shadow-solar transition-all duration-300 transform hover:-translate-y-2 border-none bg-white/80 backdrop-blur-sm"
+                  >
+                    <CardContent className="p-8">
+                      <div className="flex items-start space-x-6">
+                        <div className="flex items-center justify-center w-16 h-16 bg-gradient-solar rounded-xl shadow-lg flex-shrink-0 transform hover:rotate-6 transition-transform">
+                          <IconComponent className="h-8 w-8 text-primary-foreground" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
+                          <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Details Section with Specifications */}
       <section className="py-24 bg-white animate-slideUp">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-playfair">
-              Smart Solar Street Lighting Solutions
+              Technical Specifications
             </h2>
             
             <div className="prose prose-lg max-w-none mb-12">
@@ -145,34 +188,18 @@ const SolarStreetLights = () => {
               </p>
             </div>
 
-            {/* Specifications */}
+            {/* Specifications Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-              {specifications.map((spec, index) => (
-                <Card key={index} className="text-center hover:shadow-nature transition-all duration-300">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-primary mb-2">{spec.label}</h3>
-                    <p className="text-muted-foreground">{spec.value}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-              {features.map((feature, index) => {
-                const IconComponent = feature.icon;
+              {specifications.map((spec, index) => {
+                const IconComponent = spec.icon;
                 return (
-                  <Card key={index} className="hover:shadow-nature transition-all duration-300">
+                  <Card key={index} className="text-center hover:shadow-nature transition-all duration-300">
                     <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex items-center justify-center w-12 h-12 bg-gradient-nature rounded-full flex-shrink-0">
-                          <IconComponent className="h-6 w-6 text-primary-foreground" />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-semibold mb-2 font-playfair">{feature.title}</h3>
-                          <p className="text-muted-foreground">{feature.description}</p>
-                        </div>
+                      <div className="flex items-center justify-center w-12 h-12 bg-gradient-nature rounded-full mb-4 mx-auto">
+                        <IconComponent className="h-6 w-6 text-white" />
                       </div>
+                      <h3 className="font-semibold text-primary mb-2">{spec.label}</h3>
+                      <p className="text-muted-foreground">{spec.value}</p>
                     </CardContent>
                   </Card>
                 );
@@ -182,7 +209,7 @@ const SolarStreetLights = () => {
         </div>
       </section>
 
-      {/* Use Cases Section with enhanced styling */}
+      {/* Use Cases Section */}
       <section className="py-20 bg-muted/50 animate-slideUp">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -211,6 +238,7 @@ const SolarStreetLights = () => {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-20 h-20 mx-auto mb-6 bg-gradient-nature rounded-full flex items-center justify-center">
+                <MapPin className="h-8 w-8 text-white" />
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
               <h3 className="text-xl font-bold mb-4">Site Assessment</h3>
@@ -218,6 +246,7 @@ const SolarStreetLights = () => {
             </div>
             <div className="text-center">
               <div className="w-20 h-20 mx-auto mb-6 bg-gradient-nature rounded-full flex items-center justify-center">
+                <Wrench className="h-8 w-8 text-white" />
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
               <h3 className="text-xl font-bold mb-4">Quick Installation</h3>
@@ -225,6 +254,7 @@ const SolarStreetLights = () => {
             </div>
             <div className="text-center">
               <div className="w-20 h-20 mx-auto mb-6 bg-gradient-nature rounded-full flex items-center justify-center">
+                <Zap className="h-8 w-8 text-white" />
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
               <h3 className="text-xl font-bold mb-4">Ready to Use</h3>

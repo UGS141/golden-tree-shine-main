@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import { GetQuoteForm } from '@/components/GetQuoteForm';
 import { 
   Sun, 
   Droplets, 
@@ -17,6 +19,9 @@ import {
 } from 'lucide-react';
 
 const Services = () => {
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -140,12 +145,8 @@ const Services = () => {
               return (
                 <Card 
                   key={index} 
-                  className={`relative card-hover animate-fade-in group cursor-pointer ${service.popular ? 'ring-2 ring-primary' : ''}`}
+                  className={`relative card-hover animate-fade-in group ${service.popular ? 'ring-2 ring-primary' : ''}`}
                   style={{animationDelay: `${index * 100}ms`}}
-                  onClick={() => {
-                    window.location.href = service.path;
-                    scrollToTop();
-                  }}
                 >
                   {service.popular && (
                     <Badge className="absolute -top-3 left-4 bg-primary text-white">
@@ -168,9 +169,21 @@ const Services = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="pt-4 border-t">
-                      <p className="text-2xl font-bold text-primary mb-4">{service.price}</p>
-                      <Button className="w-full btn-primary group">
+                    <div className="pt-4 border-t space-y-3">
+                      <Link 
+                        to={service.path} 
+                        className="w-full inline-block text-center text-primary font-medium hover:underline"
+                      >
+                        Learn More
+                        <ArrowRight className="ml-2 h-4 w-4 inline-block" />
+                      </Link>
+                      <Button 
+                        className="w-full btn-primary group"
+                        onClick={() => {
+                          setSelectedService(service.title);
+                          setShowQuoteForm(true);
+                        }}
+                      >
                         Get Quote
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
@@ -231,32 +244,15 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Add GetQuoteForm */}
+      <GetQuoteForm 
+        open={showQuoteForm} 
+        onOpenChange={setShowQuoteForm} 
+      />
       <Footer />
     </div>
   );
 };
 
 export default Services;
-const simpleServices = [
-  {
-    icon: Sun,
-    title: "Solar Rooftop Installations",
-    description: "Complete solar panel systems for residential and commercial properties with maximum efficiency.",
-    features: ["25-year warranty", "Grid-tied systems", "Net metering support"],
-    path: "/services/RooftopSolar"
-  },
-  {
-    icon: Droplets,
-    title: "Solar Water Heaters",
-    description: "Energy-efficient water heating solutions using solar technology for year-round hot water.",
-    features: ["Instant hot water", "Low maintenance", "Energy savings up to 80%"],
-    path: "/services/SolarWaterHeaters"
-  },
-  {
-    icon: Lightbulb,
-    title: "Solar Street Lights",
-    description: "Automatic LED street lighting systems powered by solar energy for outdoor spaces.",
-    features: ["Motion sensors", "Weather resistant", "10+ hour backup"],
-    path: "/services/SolarStreetLights"
-  }
-];
+const simpleServices = [ ];

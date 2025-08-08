@@ -47,7 +47,7 @@ export function FreeVisitForm({ open, onOpenChange }: FreeVisitFormProps) {
             Schedule a FREE consultation
           </DialogTitle>
         </DialogHeader>
-        <form name="free-visit" className="space-y-4" Netlify>
+        <form name="free-visit" className="space-y-4" data-netlify="true">
           <input type="hidden" name="form-name" value="free-visit" />
           
           <div className="grid grid-cols-3 gap-4 mb-4">
