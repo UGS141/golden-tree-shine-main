@@ -4,37 +4,48 @@ import { PlayCircle, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-reac
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+// Import all images
+import streetLightsImage from '@/assets/solar-street-lights.jpg';
+import heroImage from '@/assets/hero-solar.jpg';
+import rooftopImage from '@/assets/rooftop-solar.jpg';
+import cctvImage from '@/assets/solar-cctv.jpg';
+import pumpingImage from '@/assets/solar-farm-pumping.jpg';
+import fencingImage from '@/assets/solar-fencing.jpg';
+import inverterImage from '@/assets/solar-inverter.jpg';
+import waterHeaterImage from '@/assets/solar-water-heater.jpg';
+
+// Import videos
+import videoW1 from '@/assets/Golden-tree-videoW1.mp4';
+import videoW2 from '@/assets/Golden-tree-videoW2.mp4';
+import videoW3 from '@/assets/Golden-tree-videoW3.mp4';
+
 const GallerySection = () => {
   // Images for the automatic slider
   const images = [
-    
-    "src/assets/solar-street-lights.jpg",
-    "src/assets/hero-solar.jpg",
-    "src/assets/rooftop-solar.jpg",
-    
-    "src/assets/solar-cctv.jpg",
-    "src/assests/Golden-tree-imgW.mp4.jpg",
-    "src/assests/Golden-tree-imgW1.mp4.jpg",
-    "src/assets/solar-farm-pumping.jpg",
-    "src/assets/solar-fencing.jpg",
-    "src/assets/solar-inverter.jpg",
-    "src/assets/solar-water-heater.jpg"
+    streetLightsImage,
+    heroImage,
+    rooftopImage,
+    cctvImage,
+    pumpingImage,
+    fencingImage,
+    inverterImage,
+    waterHeaterImage
   ];
 
   // Videos for the gallery
   const videos = [
     {
-      src: "src/assets/Golden-tree-videoW1.mp4",
+      src: videoW1,
       title: "Solar Installation Project",
       description: "Professional solar panel installation by our expert team"
     },
     {
-      src: "src/assets/Golden-tree-videoW2.mp4",
+      src: videoW2,
       title: "Commercial Solar Project",
       description: "Large-scale commercial solar installation"
     },
     {
-      src: "src/assets/Golden-tree-videoW3.mp4",
+      src: videoW3,
       title: "Residential Solar Setup",
       description: "Complete residential solar power solution"
     }
@@ -185,7 +196,7 @@ const GallerySection = () => {
             <CardContent className="p-0">
               <div className="relative aspect-video">
                 <img 
-                  src="src/assets/solar-street-lights.jpg" 
+                  src={streetLightsImage} 
                   alt="Solar Street Lights Project"
                   className="object-cover w-full h-full"
                 />
@@ -201,7 +212,7 @@ const GallerySection = () => {
             <CardContent className="p-0">
               <div className="relative aspect-video">
                 <img 
-                  src="src/assets/solar-cctv.jpg" 
+                  src={cctvImage} 
                   alt="Solar CCTV Project"
                   className="object-cover w-full h-full"
                 />
@@ -217,7 +228,7 @@ const GallerySection = () => {
             <CardContent className="p-0">
               <div className="relative aspect-video">
                 <img 
-                  src="src/assets/rooftop-solar.jpg" 
+                  src={rooftopImage} 
                   alt="Rooftop Solar Project"
                   className="object-cover w-full h-full"
                 />
