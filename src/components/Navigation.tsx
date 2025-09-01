@@ -35,7 +35,7 @@ const Navigation = () => {
                 className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
               >
                 <Phone className="h-5 w-5" />
-                <span className="text-base font-medium">+91 98765 43210</span>
+                <span className="text-base font-medium">+91 7993436520</span>
               </a>
               <a 
                 href="mailto:info@goldentreelifespaces.com" 

@@ -182,7 +182,12 @@ const Contact = () => {
               <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
               <Card className="card-hover">
                 <CardContent className="p-8">
-                  <form onSubmit={handleSubmit} className="space-y-6" data-netlify="true" name="contact">
+                  <form
+                    action="https://formspree.io/f/xgvlzazw"
+                    method="POST"
+                    id="contactForm"
+                    onSubmit={handleSubmit}
+                  >
                     <input type="hidden" name="form-name" value="contact" />
                     
                     <div className="grid md:grid-cols-2 gap-4">
@@ -274,43 +279,38 @@ const Contact = () => {
                 <CardContent className="p-0">
                   <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.7064!3d12.9698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzExLjMiTiA3N8KwNDInMjMuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.5762262489723!2d79.98073731482347!3d14.439246089898786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4cf3f7d753e301%3A0x8f20eef1fb51b4fe!2sGOLDEN%20TREE%20LIFE%20SPACES%20SOLAR%20IN%20NELLORE!5e0!3m2!1sen!2sin!4v1652345678901!5m2!1sen!2sin"
                       width="100%"
                       height="256"
                       style={{ border: 0 }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Golden Tree Life Spaces Location"
+                      title="Golden Tree Life Spaces Location 1"
+                    ></iframe>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              {/* Second Location */}
+              <Card className="mb-8 card-hover">
+                <CardContent className="p-0">
+                  <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.8762262489723!2d79.97073731482347!3d14.429246089898786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4cf50391cefcf9%3A0xf8a3c0fd82bb70e2!2sGolden%20tree%20life%20spaces%20%26%20Cement%20and%20Steel!5e0!3m2!1sen!2sin!4v1652345678901!5m2!1sen!2sin"
+                      width="100%"
+                      height="256"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Golden Tree Life Spaces & Cement and Steel Location"
                     ></iframe>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Office List */}
-              <div className="space-y-4">
-                {offices.map((office, index) => (
-                  <Card key={index} className="card-hover">
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-primary mb-2">{office.city} Office</h3>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-start gap-2">
-                          <MapPin className="h-4 w-4 text-primary mt-0.5" />
-                          <span className="text-muted-foreground">{office.address}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Phone className="h-4 w-4 text-primary" />
-                          <span className="text-muted-foreground">{office.phone}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Mail className="h-4 w-4 text-primary" />
-                          <span className="text-muted-foreground">{office.email}</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              
             </div>
           </div>
         </div>

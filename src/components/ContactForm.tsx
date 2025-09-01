@@ -75,7 +75,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Call Us</h3>
-                    <p className="text-muted-foreground">+91 98765 43210</p>
+                    <p className="text-muted-foreground">+91 7993436520</p>
                   </div>
                 </div>
               </CardContent>
@@ -103,7 +103,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Visit Us</h3>
-                    <p className="text-muted-foreground">Mumbai, Maharashtra</p>
+                    <p className="text-muted-foreground">Nellore, Andhra Pradesh</p>
                   </div>
                 </div>
               </CardContent>
