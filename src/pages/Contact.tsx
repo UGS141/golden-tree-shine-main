@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useForm, ValidationError } from '@formspree/react';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -25,6 +26,9 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+
+  // Formspree integration
+  const [formState, handleFormspreeSubmit] = useForm("xeolzaqj");
 
   const contactInfo = [
     {
@@ -84,7 +88,7 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -97,19 +101,25 @@ const Contact = () => {
       return;
     }
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-    });
+    // Submit to Formspree
+    await handleFormspreeSubmit(e);
     
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+    // If submission was successful
+    if (formState.succeeded) {
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    }
   };
 
   return (
@@ -182,90 +192,118 @@ const Contact = () => {
               <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
               <Card className="card-hover">
                 <CardContent className="p-8">
-                  <form
-                    action="https://formspree.io/f/xgvlzazw"
-                    method="POST"
-                    id="contactForm"
-                    onSubmit={handleSubmit}
-                  >
-                    <input type="hidden" name="form-name" value="contact" />
-                    
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
+                  {formState.succeeded ? (
+                    <div className="text-center py-8">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Send className="h-8 w-8 text-green-600" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-green-600 mb-2">Message Sent!</h3>
+                      <p className="text-muted-foreground mb-6">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                      <Button 
+                        onClick={() => window.location.reload()} 
+                        variant="outline" 
+                        className="btn-primary"
+                      >
+                        Send Another Message
+                      </Button>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit}>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">
+                            Your Name *
+                          </label>
+                          <Input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={(e) => handleInputChange('name', e.target.value)}
+                            placeholder="Enter your full name"
+                            required
+                          />
+                          <ValidationError prefix="Name" field="name" errors={formState.errors} className="text-sm text-red-500 mt-1" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">
+                            Phone Number *
+                          </label>
+                          <Input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                            placeholder="+91 98765 43210"
+                            required
+                          />
+                          <ValidationError prefix="Phone" field="phone" errors={formState.errors} className="text-sm text-red-500 mt-1" />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">
+                            Email Address *
+                          </label>
+                          <Input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            placeholder="your.email@example.com"
+                            required
+                          />
+                          <ValidationError prefix="Email" field="email" errors={formState.errors} className="text-sm text-red-500 mt-1" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">
+                            Subject
+                          </label>
+                          <Input
+                            type="text"
+                            name="subject"
+                            value={formData.subject}
+                            onChange={(e) => handleInputChange('subject', e.target.value)}
+                            placeholder="What can we help you with?"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-4">
                         <label className="block text-sm font-medium mb-2">
-                          Your Name *
+                          Message *
                         </label>
-                        <Input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
-                          placeholder="Enter your full name"
+                        <Textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={(e) => handleInputChange('message', e.target.value)}
+                          placeholder="Tell us about your energy needs..."
+                          rows={4}
                           required
                         />
+                        <ValidationError prefix="Message" field="message" errors={formState.errors} className="text-sm text-red-500 mt-1" />
                       </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">
-                          Phone Number *
-                        </label>
-                        <Input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder="+91 98765 43210"
-                          required
-                        />
-                      </div>
-                    </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">
-                          Email Address *
-                        </label>
-                        <Input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
-                          placeholder="your.email@example.com"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">
-                          Subject
-                        </label>
-                        <Input
-                          type="text"
-                          name="subject"
-                          value={formData.subject}
-                          onChange={(e) => handleInputChange('subject', e.target.value)}
-                          placeholder="What can we help you with?"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium mb-2">
-                        Message *
-                      </label>
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={(e) => handleInputChange('message', e.target.value)}
-                        placeholder="Tell us about your energy needs..."
-                        rows={4}
-                        required
-                      />
-                    </div>
-
-                    <Button type="submit" size="lg" className="w-full btn-primary">
-                      <Send className="mr-2 h-5 w-5" />
-                      Send Message
-                    </Button>
-                  </form>
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full btn-primary mt-6"
+                        disabled={formState.submitting}
+                      >
+                        {formState.submitting ? (
+                          <>
+                            <div className="animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="mr-2 h-5 w-5" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  )}
                 </CardContent>
               </Card>
             </div>
