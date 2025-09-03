@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { FreeVisitForm } from './FreeVisitForm';
@@ -11,17 +11,71 @@ const Navigation = () => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [showVisitForm, setShowVisitForm] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Scroll to top when navigating to a new page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
     { path: '/services', label: 'Services' },
-    { path: '/projects', label: 'Projects' },
+    { path: '/#projects', label: 'Projects' },
     { path: '/testimonials', label: 'Testimonials' },
     { path: '/contact', label: 'Contact' }
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    if (path.includes('#')) {
+      return location.pathname === '/' && location.hash === path.split('/')[1];
+    }
+    return location.pathname === path;
+  };
+
+  // Function to handle navigation with scroll for anchor links
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    if (path.includes('#')) {
+      const id = path.split('#')[1];
+      
+      // If we're already on the home page
+      if (location.pathname === '/') {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      } else {
+        // If we're on another page, navigate to home with the hash
+        navigate('/', { state: { scrollToId: id } });
+      }
+    } else {
+      navigate(path);
+    }
+  };
+
+  // Check for scrollToId in location state when component mounts or updates
+  useEffect(() => {
+    if (location.state && location.state.scrollToId) {
+      setTimeout(() => {
+        const element = document.getElementById(location.state.scrollToId);
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Clear the state after scrolling
+          navigate('/', { replace: true, state: {} });
+        }
+      }, 100); // Small delay to ensure the page has rendered
+    }
+  }, [location.state, navigate]);
 
   return (
     <nav className="bg-background shadow-soft sticky top-0 z-50">
@@ -31,7 +85,7 @@ const Navigation = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
               <a 
-                href="tel:+919876543210" 
+                href="tel:+917993436520" 
                 className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
               >
                 <Phone className="h-5 w-5" />
@@ -71,15 +125,16 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 className={`font-medium transition-colors hover:text-primary ${
                   isActive(item.path) ? 'text-primary' : 'text-foreground'
                 }`}
+                onClick={(e) => handleNavigation(e, item.path)}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -117,16 +172,16 @@ const Navigation = () => {
         <div className="lg:hidden bg-background border-t shadow-lg">
           <div className="container mx-auto px-4 py-6 space-y-6">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 className={`block py-2 text-lg font-medium transition-colors hover:text-primary ${
                   isActive(item.path) ? 'text-primary' : 'text-foreground'
                 }`}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavigation(e, item.path)}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
             <div className="flex flex-col gap-3 pt-4 border-t">
               <Button 

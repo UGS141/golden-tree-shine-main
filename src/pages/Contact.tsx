@@ -139,11 +139,20 @@ const Contact = () => {
               We're here to help you every step of the way.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="btn-primary animate-scale-in">
+              <Button 
+                size="lg" 
+                className="btn-primary animate-scale-in"
+                onClick={() => window.location.href = "tel:+917993436520"}
+              >
                 <Phone className="mr-2 h-5 w-5" />
-                Call Now
+                Call Now: +91 7993436520
               </Button>
-              <Button size="lg" variant="outline" className="btn-accent">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="btn-accent"
+                onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSdRdjDw8egRHqtBqGW8h4LFdBUmynSVDOQTWWBky2h53bcjDQ/viewform?usp=header", "_blank")}
+              >
                 <Zap className="mr-2 h-5 w-5" />
                 Free Site Visit
               </Button>
@@ -189,121 +198,64 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="animate-fade-in">
-              <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
-              <Card className="card-hover">
-                <CardContent className="p-8">
-                  {formState.succeeded ? (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Send className="h-8 w-8 text-green-600" />
+              <h2 className="text-3xl font-bold mb-6">Book Your Free Site Visit</h2>
+              <Card className="card-hover overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="grid md:grid-cols-2">
+                    <div className="bg-gradient-to-br from-primary to-accent p-8 text-white">
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-bold mb-3">Why Book a Site Visit?</h3>
+                        <ul className="space-y-3">
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1 h-5 w-5 bg-white/20 rounded-full flex items-center justify-center">✓</div>
+                            <span>Personalized energy assessment</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1 h-5 w-5 bg-white/20 rounded-full flex items-center justify-center">✓</div>
+                            <span>Custom solutions for your space</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1 h-5 w-5 bg-white/20 rounded-full flex items-center justify-center">✓</div>
+                            <span>Detailed cost estimates</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1 h-5 w-5 bg-white/20 rounded-full flex items-center justify-center">✓</div>
+                            <span>Expert consultation</span>
+                          </li>
+                        </ul>
                       </div>
-                      <h3 className="text-2xl font-bold text-green-600 mb-2">Message Sent!</h3>
-                      <p className="text-muted-foreground mb-6">Thank you for contacting us. We'll get back to you within 24 hours.</p>
-                      <Button 
-                        onClick={() => window.location.reload()} 
-                        variant="outline" 
-                        className="btn-primary"
-                      >
-                        Send Another Message
-                      </Button>
+                      <div>
+                        <h4 className="font-semibold mb-2">What to expect:</h4>
+                        <p className="text-white/80 text-sm">Our expert will visit your location, assess your energy needs, and provide a detailed proposal within 24 hours.</p>
+                      </div>
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit}>
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium mb-2">
-                            Your Name *
-                          </label>
-                          <Input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={(e) => handleInputChange('name', e.target.value)}
-                            placeholder="Enter your full name"
-                            required
-                          />
-                          <ValidationError prefix="Name" field="name" errors={formState.errors} className="text-sm text-red-500 mt-1" />
+                    
+                    <div className="p-8">
+                      <div className="text-center mb-6">
+                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Zap className="h-8 w-8 text-primary" />
                         </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">
-                            Phone Number *
-                          </label>
-                          <Input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
-                            placeholder="+91 98765 43210"
-                            required
-                          />
-                          <ValidationError prefix="Phone" field="phone" errors={formState.errors} className="text-sm text-red-500 mt-1" />
+                        <h3 className="text-2xl font-bold mb-2">Schedule Now</h3>
+                        <p className="text-muted-foreground">Fill out our form and we'll reach you within 24 hours</p>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <Button 
+                          onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSdRdjDw8egRHqtBqGW8h4LFdBUmynSVDOQTWWBky2h53bcjDQ/viewform?usp=header", "_blank")} 
+                          size="lg" 
+                          className="w-full btn-primary animate-pulse"
+                        >
+                          <Zap className="mr-2 h-5 w-5" />
+                          Start Filling the Form
+                        </Button>
+                        
+                        <div className="text-center text-sm text-muted-foreground">
+                          <p>Or call us directly at</p>
+                          <p className="font-semibold text-primary">+91 7993436520</p>
                         </div>
                       </div>
-
-                      <div className="grid md:grid-cols-2 gap-4 mt-4">
-                        <div>
-                          <label className="block text-sm font-medium mb-2">
-                            Email Address *
-                          </label>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
-                            placeholder="your.email@example.com"
-                            required
-                          />
-                          <ValidationError prefix="Email" field="email" errors={formState.errors} className="text-sm text-red-500 mt-1" />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">
-                            Subject
-                          </label>
-                          <Input
-                            type="text"
-                            name="subject"
-                            value={formData.subject}
-                            onChange={(e) => handleInputChange('subject', e.target.value)}
-                            placeholder="What can we help you with?"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="mt-4">
-                        <label className="block text-sm font-medium mb-2">
-                          Message *
-                        </label>
-                        <Textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={(e) => handleInputChange('message', e.target.value)}
-                          placeholder="Tell us about your energy needs..."
-                          rows={4}
-                          required
-                        />
-                        <ValidationError prefix="Message" field="message" errors={formState.errors} className="text-sm text-red-500 mt-1" />
-                      </div>
-
-                      <Button 
-                        type="submit" 
-                        size="lg" 
-                        className="w-full btn-primary mt-6"
-                        disabled={formState.submitting}
-                      >
-                        {formState.submitting ? (
-                          <>
-                            <div className="animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="mr-2 h-5 w-5" />
-                            Send Message
-                          </>
-                        )}
-                      </Button>
-                    </form>
-                  )}
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -409,7 +361,12 @@ const Contact = () => {
               Ready to start your journey towards sustainable energy? We're here to help!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="outline" className="bg-white text-primary hover:bg-white/90">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-white text-primary hover:bg-white/90"
+                onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSdRdjDw8egRHqtBqGW8h4LFdBUmynSVDOQTWWBky2h53bcjDQ/viewform?usp=header", "_blank")}
+              >
                 Schedule Free Visit
               </Button>
               <Button size="lg" className="bg-white/20 text-white hover:bg-white/30">
