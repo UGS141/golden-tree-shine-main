@@ -86,7 +86,7 @@ const GallerySection = () => {
         </h2>
 
         {/* YouTube Video Section */}
-        <div className="max-w-4xl mx-auto mb-16">
+        {/* <div className="max-w-4xl mx-auto mb-16">
           <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
             <iframe
               src="https://www.youtube.com/embed/sk_gnf9e2gY?autoplay=0"
@@ -112,7 +112,7 @@ const GallerySection = () => {
               Watch on YouTube
             </a>
           </div>
-        </div>
+        </div> */}
 
         {/* Automatic Image Slider */}
         <div className="max-w-5xl mx-auto mb-16">
