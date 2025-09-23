@@ -32,25 +32,25 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+91 98765 43210', '+91 87654 32109'],
+      details: ['+91 9885848445', '+91 9381881691'],
       description: 'Available 24/7 for emergency support'
     },
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['info@goldentreelifespaces.com', 'support@goldentreelifespaces.com'],
+      details: ['info@goldentreelifespaces.com', 'goldentreelifespaces@gmail.com'],
       description: 'We respond within 2 hours'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: ['123 Green Energy Park', 'Bangalore, Karnataka - 560001'],
+      details: ['Nellore', 'Andhra Pradesh, India'],
       description: 'Mon-Sat: 9 AM - 6 PM'
     },
     {
       icon: MessageSquare,
       title: 'WhatsApp',
-      details: ['+91 98765 43210'],
+      details: ['+91 9885848445'],
       description: 'Quick responses via WhatsApp'
     }
   ];
