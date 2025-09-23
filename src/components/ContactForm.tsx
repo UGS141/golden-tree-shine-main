@@ -1,5 +1,3 @@
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -124,7 +122,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
+     
       
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-primary/10 to-accent/10 overflow-hidden">
@@ -376,8 +374,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
