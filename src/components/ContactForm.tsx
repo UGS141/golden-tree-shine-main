@@ -143,7 +143,9 @@ const Contact = () => {
                 onClick={() => window.location.href = "tel:+917993436520"}
               >
                 <Phone className="mr-2 h-5 w-5" />
-                Call Now: +91 7993436520
+                call now:
+                 <span className="text-gray-300 text-sm">+91 9885848445</span>
+                <span className="text-gray-300 text-sm">+91 9381881691</span>
               </Button>
               <Button 
                 size="lg" 
@@ -249,7 +251,7 @@ const Contact = () => {
                         
                         <div className="text-center text-sm text-muted-foreground">
                           <p>Or call us directly at</p>
-                          <p className="font-semibold text-primary">+91 7993436520</p>
+                          <p className="font-semibold text-primary">+91 </p>
                         </div>
                       </div>
                     </div>
