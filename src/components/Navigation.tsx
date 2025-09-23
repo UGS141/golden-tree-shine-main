@@ -89,14 +89,14 @@ const Navigation = () => {
                 className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
               >
                 <Phone className="h-5 w-5" />
-                <span className="text-base font-medium">+91 7993436520</span>
+                <span className="text-base font-medium">+91 9885848445</span>
               </a>
               <a 
                 href="mailto:info@goldentreelifespaces.com" 
                 className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
               >
                 <Mail className="h-5 w-5" />
-                <span className="text-base font-medium">info@goldentreelifespaces.com</span>
+                <span className="text-base font-medium">goldentreelifespaces@gmail.com</span>
               </a>
             </div>
             <div className="hidden md:block text-sm font-medium">
