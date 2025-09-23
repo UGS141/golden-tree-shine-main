@@ -81,9 +81,9 @@ const GallerySection = () => {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-white to-secondary/20">
       <div className="container mx-auto px-4">
-        {/* <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-          Our <span className="text-gradient">Featured Projects</span>
-        </h2> */}
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          Our <span className="text-gradient">Project Gallery</span>
+        </h2>
 
         {/* YouTube Video Section */}
         {/* <div className="max-w-4xl mx-auto mb-16">
@@ -116,7 +116,7 @@ const GallerySection = () => {
 
         {/* Automatic Image Slider */}
         <div className="max-w-5xl mx-auto mb-16">
-          <h3 className="text-3xl font-semibold text-center mb-8">Our Project Gallery</h3>
+          {/* <h3 className="text-3xl font-semibold text-center mb-8">Our Project Gallery</h3> */}
           <div className="relative aspect-[16/9] rounded-xl overflow-hidden shadow-2xl group">
             <div className="absolute inset-0 flex transition-transform duration-500 ease-in-out" 
                  style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}>
