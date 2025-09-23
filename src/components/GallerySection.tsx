@@ -81,9 +81,9 @@ const GallerySection = () => {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-white to-secondary/20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+        {/* <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
           Our <span className="text-gradient">Featured Projects</span>
-        </h2>
+        </h2> */}
 
         {/* YouTube Video Section */}
         {/* <div className="max-w-4xl mx-auto mb-16">
