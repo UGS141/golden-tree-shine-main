@@ -81,7 +81,7 @@ const HeroSection = () => {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            {/* Removed green overlay */}
+            {/* ✅ Removed green shade overlay */}
           </div>
         ))}
       </div>
@@ -158,6 +158,8 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* ❌ Removed Slider Controls and Dots */}
       </div>
 
       {/* Scroll Indicator */}
