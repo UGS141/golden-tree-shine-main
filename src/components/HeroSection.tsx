@@ -1,15 +1,75 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Zap, Award } from 'lucide-react';
+import { ArrowRight, Shield, Zap, Award, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+// Images
 import heroImage from '@/assets/hero-solar.jpg';
+import serviceSolar from '@/assets/service-solar.jpg';
+import serviceSecurity from '@/assets/service-security.jpg';
+import serviceEnergy from '@/assets/service-energy.jpg';
+import heroSolarHome from '@/assets/hero-solar-home.jpg';
+import rooftopSolar from '@/assets/rooftop-solar.jpg';
+import serviceBattery from '@/assets/service-battery.jpg';
+import serviceInverter from '@/assets/service-inverter.jpg';
 
 import { FreeVisitForm } from './FreeVisitForm';
 import { GetQuoteForm } from './GetQuoteForm';
 import { Link } from 'react-router-dom';
 
+const services = [
+  {
+    title: "Hero Solar Home",
+    description: "Reliable home solar systems designed for maximum efficiency.",
+    image: heroSolarHome,
+  },
+  {
+    title: "Rooftop Solar Solutions",
+    description: "Generate clean energy directly from your rooftop.",
+    image: rooftopSolar,
+  },
+  {
+    title: "Solar Panel Installation",
+    description: "Power your home with reliable solar solutions and reduce electricity bills.",
+    image: serviceSolar,
+  },
+  {
+    title: "Smart Security Systems",
+    description: "Protect your family with modern surveillance and smart alarm systems.",
+    image: serviceSecurity,
+  },
+  {
+    title: "Energy Management",
+    description: "Optimize energy consumption with advanced monitoring and EMI options.",
+    image: serviceEnergy,
+  },
+  {
+    title: "Battery Backup Systems",
+    description: "Ensure uninterrupted power supply with advanced solar batteries.",
+    image: serviceBattery,
+  },
+  {
+    title: "Inverter Solutions",
+    description: "Smart inverters that guarantee reliable power conversion.",
+    image: serviceInverter,
+  },
+];
+
 const HeroSection = () => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [showVisitForm, setShowVisitForm] = useState(false);
+
+  // Slider state
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % services.length);
+  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
+
+  // Auto-slide every 6s
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -58,43 +118,52 @@ const HeroSection = () => {
               {/* Add the forms */}
               <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
               <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
-              
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
-              <div className="flex items-center space-x-3">
-                <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center">
-                  <Award className="h-6 w-6 text-accent-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Certified Experts</h3>
-                  <p className="text-white/80 text-sm">Licensed & Trained</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-accent-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Quality Materials</h3>
-                  <p className="text-white/80 text-sm">Premium Components</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center">
-                  <Zap className="h-6 w-6 text-accent-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">EMI Available</h3>
-                  <p className="text-white/80 text-sm">Flexible Payment</p>
-                </div>
-              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* === Services Slider Section === */}
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 w-[90%] max-w-5xl">
+        <div className="relative rounded-2xl overflow-hidden shadow-lg">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <img 
+                src={services[currentIndex].image} 
+                alt={services[currentIndex].title} 
+                className="w-full h-72 object-cover"
+              />
+              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center px-6">
+                <h2 className="text-3xl font-bold text-white mb-3">
+                  {services[currentIndex].title}
+                </h2>
+                <p className="text-lg text-white/90 max-w-2xl">
+                  {services[currentIndex].description}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Slider Controls */}
+          <button 
+            onClick={prevSlide} 
+            className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow"
+          >
+            <ChevronLeft className="h-6 w-6 text-gray-800" />
+          </button>
+          <button 
+            onClick={nextSlide} 
+            className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow"
+          >
+            <ChevronRight className="h-6 w-6 text-gray-800" />
+          </button>
         </div>
       </div>
 
