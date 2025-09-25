@@ -168,7 +168,7 @@ const HeroSection = () => {
         </div>
 
         {/* Slider Controls */}
-        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
+        {/* <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
           <button
             onClick={prevSlide}
             className="px-4 py-2 bg-white/30 hover:bg-white/50 rounded-full text-white font-bold"
@@ -181,10 +181,10 @@ const HeroSection = () => {
           >
             ›
           </button>
-        </div>
+        </div> */}
 
         {/* Dots Indicator */}
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+        {/* <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
           {slides.map((_, index) => (
             <div
               key={index}
@@ -194,7 +194,7 @@ const HeroSection = () => {
             ></div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce">
