@@ -85,7 +85,7 @@ const Navigation = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
               <a 
-                href="tel:+917993436520" 
+                href="tel:+919885848445" 
                 className="flex items-center gap-2 hover:bg-primary-foreground/10 px-3 py-1.5 rounded-full transition-all"
               >
                 <Phone className="h-5 w-5" />
@@ -147,12 +147,15 @@ const Navigation = () => {
             >
               Get Quote
             </Button>
-            <Button 
-              className="bg-accent hover:bg-accent/90 text-white text-base font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-              onClick={() => setShowVisitForm(true)}
-            >
-              Book Free Visit
-            </Button>
+             <Button
+  asChild
+  className="bg-green-500 hover:bg-green-600 text-white text-base font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+>
+  <a href="tel:+919885848445">
+    Call Us
+  </a>
+</Button>
+
           </div>
 
           {/* Mobile Menu Button */}
