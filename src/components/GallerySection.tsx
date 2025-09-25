@@ -255,8 +255,6 @@ const GallerySection = () => {
           </Link>
         </div>
       </div>
-
-       <WhyChooseUs />
     </section>
   );
 };
