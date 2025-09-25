@@ -65,14 +65,6 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () => {
-    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Slider */}
@@ -89,7 +81,7 @@ const HeroSection = () => {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60"></div>
+            {/* Removed green overlay */}
           </div>
         ))}
       </div>
@@ -166,35 +158,7 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Slider Controls */}
-        {/* <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
-          <button
-            onClick={prevSlide}
-            className="px-4 py-2 bg-white/30 hover:bg-white/50 rounded-full text-white font-bold"
-          >
-            ‹
-          </button>
-          <button
-            onClick={nextSlide}
-            className="px-4 py-2 bg-white/30 hover:bg-white/50 rounded-full text-white font-bold"
-          >
-            ›
-          </button>
-        </div> */}
-
-        {/* Dots Indicator */}
-        {/* <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-          {slides.map((_, index) => (
-            <div
-              key={index}
-              className={`w-3 h-3 rounded-full ${
-                current === index ? 'bg-yellow-400' : 'bg-white/50'
-              }`}
-            ></div>
-          ))}
-        </div>
-      </div> */}
+      </div>
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce">
