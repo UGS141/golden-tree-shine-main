@@ -1,86 +1,97 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Zap, Award, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Shield, Zap, Award } from 'lucide-react';
 
-// Images
-import heroImage from '@/assets/hero-solar.jpg';
-import serviceSolar from '@/assets/service-solar.jpg';
-import serviceSecurity from '@/assets/service-security.jpg';
-import serviceEnergy from '@/assets/service-energy.jpg';
+// Import all 7 images
 import heroSolarHome from '@/assets/hero-solar-home.jpg';
 import rooftopSolar from '@/assets/rooftop-solar.jpg';
-import serviceBattery from '@/assets/service-battery.jpg';
-import serviceInverter from '@/assets/service-inverter.jpg';
+import heroSolar from '@/assets/hero-solar.jpg';
+import service1 from '@/assets/service1.jpg';
+import service2 from '@/assets/service2.jpg';
+import service3 from '@/assets/service3.jpg';
+import service4 from '@/assets/service4.jpg';
 
 import { FreeVisitForm } from './FreeVisitForm';
 import { GetQuoteForm } from './GetQuoteForm';
-import { Link } from 'react-router-dom';
 
-const services = [
+const slides = [
   {
-    title: "Hero Solar Home",
-    description: "Reliable home solar systems designed for maximum efficiency.",
     image: heroSolarHome,
+    title: 'Solar Solutions for Homes',
+    description: 'Efficient rooftop solar installations for sustainable living.',
   },
   {
-    title: "Rooftop Solar Solutions",
-    description: "Generate clean energy directly from your rooftop.",
     image: rooftopSolar,
+    title: 'Rooftop Solar Power',
+    description: 'Harness clean energy directly from your rooftop.',
   },
   {
-    title: "Solar Panel Installation",
-    description: "Power your home with reliable solar solutions and reduce electricity bills.",
-    image: serviceSolar,
+    image: heroSolar,
+    title: 'Complete Energy Solutions',
+    description: 'Powering your homes with energy & safety.',
   },
   {
-    title: "Smart Security Systems",
-    description: "Protect your family with modern surveillance and smart alarm systems.",
-    image: serviceSecurity,
+    image: service1,
+    title: 'Solar Water Heaters',
+    description: 'Save energy with advanced heating systems.',
   },
   {
-    title: "Energy Management",
-    description: "Optimize energy consumption with advanced monitoring and EMI options.",
-    image: serviceEnergy,
+    image: service2,
+    title: 'Security Systems',
+    description: 'Smart CCTV and home security installations.',
   },
   {
-    title: "Battery Backup Systems",
-    description: "Ensure uninterrupted power supply with advanced solar batteries.",
-    image: serviceBattery,
+    image: service3,
+    title: 'Battery Backup',
+    description: 'Reliable energy storage for uninterrupted power.',
   },
   {
-    title: "Inverter Solutions",
-    description: "Smart inverters that guarantee reliable power conversion.",
-    image: serviceInverter,
+    image: service4,
+    title: 'Commercial Solar',
+    description: 'Power solutions for businesses and industries.',
   },
 ];
 
 const HeroSection = () => {
+  const [current, setCurrent] = useState(0);
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [showVisitForm, setShowVisitForm] = useState(false);
 
-  // Slider state
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % services.length);
-  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
-
-  // Auto-slide every 6s
+  // Auto-slide every 5 seconds
   useEffect(() => {
-    const timer = setInterval(nextSlide, 6000);
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
+  const nextSlide = () => {
+    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Slider */}
       <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Solar panel installation" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60"></div>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === current ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60"></div>
+          </div>
+        ))}
       </div>
 
       {/* Content */}
@@ -88,87 +99,105 @@ const HeroSection = () => {
         <div className="max-w-4xl">
           <div className="text-white space-y-6">
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-              Powering Your Homes with{' '}
+              {slides[current].title}{' '}
               <span className="text-accent">Energy & Safety</span>
             </h1>
-            
+
             <p className="text-xl lg:text-2xl text-white/90 max-w-2xl">
-              Professional solar installations, security systems, and energy solutions 
-              for modern homes. Certified experts with EMI options available.
+              {slides[current].description}
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="btn-accent text-lg px-8 py-4"
                 onClick={() => setShowVisitForm(true)}
               >
                 Book Free Site Visit
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
                 onClick={() => setShowQuoteForm(true)}
               >
                 Get Instant Quote
               </Button>
 
-              {/* Add the forms */}
+              {/* Forms */}
               <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
               <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
+
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
+              <div className="flex items-center space-x-3">
+                <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center">
+                  <Award className="h-6 w-6 text-accent-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Certified Experts</h3>
+                  <p className="text-white/80 text-sm">Licensed & Trained</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-accent-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Quality Materials</h3>
+                  <p className="text-white/80 text-sm">Premium Components</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center">
+                  <Zap className="h-6 w-6 text-accent-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">EMI Available</h3>
+                  <p className="text-white/80 text-sm">Flexible Payment</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* === Services Slider Section === */}
-      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 w-[90%] max-w-5xl">
-        <div className="relative rounded-2xl overflow-hidden shadow-lg">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <img 
-                src={services[currentIndex].image} 
-                alt={services[currentIndex].title} 
-                className="w-full h-72 object-cover"
-              />
-              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center px-6">
-                <h2 className="text-3xl font-bold text-white mb-3">
-                  {services[currentIndex].title}
-                </h2>
-                <p className="text-lg text-white/90 max-w-2xl">
-                  {services[currentIndex].description}
-                </p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+        {/* Slider Controls */}
+        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
+          <button
+            onClick={prevSlide}
+            className="px-4 py-2 bg-white/30 hover:bg-white/50 rounded-full text-white font-bold"
+          >
+            ‹
+          </button>
+          <button
+            onClick={nextSlide}
+            className="px-4 py-2 bg-white/30 hover:bg-white/50 rounded-full text-white font-bold"
+          >
+            ›
+          </button>
+        </div>
 
-          {/* Slider Controls */}
-          <button 
-            onClick={prevSlide} 
-            className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow"
-          >
-            <ChevronLeft className="h-6 w-6 text-gray-800" />
-          </button>
-          <button 
-            onClick={nextSlide} 
-            className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow"
-          >
-            <ChevronRight className="h-6 w-6 text-gray-800" />
-          </button>
+        {/* Dots Indicator */}
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {slides.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full ${
+                current === index ? 'bg-yellow-400' : 'bg-white/50'
+              }`}
+            ></div>
+          ))}
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
         </div>
