@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { PlayCircle, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import WhyChooseUs from "@/components/WhyChooseUs";
+
 
 // Import all images
 import streetLightsImage from '@/assets/solar-street-lights.jpg';
@@ -253,6 +255,8 @@ const GallerySection = () => {
           </Link>
         </div>
       </div>
+
+       <WhyChooseUs />
     </section>
   );
 };
