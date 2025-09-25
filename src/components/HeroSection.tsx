@@ -81,7 +81,6 @@ const HeroSection = () => {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            {/* ✅ Removed green shade overlay */}
           </div>
         ))}
       </div>
@@ -89,7 +88,8 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative container mx-auto px-4 z-10">
         <div className="max-w-4xl">
-          <div className="text-white space-y-6">
+          {/* Text Background Overlay */}
+          <div className="text-white space-y-6 bg-black/50 rounded-xl p-6">
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
               {slides[current].title}{' '}
               <span className="text-accent">Energy & Safety</span>
@@ -158,8 +158,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-
-        {/* ❌ Removed Slider Controls and Dots */}
       </div>
 
       {/* Scroll Indicator */}
