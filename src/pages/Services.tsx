@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { GetQuoteForm } from '@/components/GetQuoteForm';
+import { Calendar, FileText, LineChart, Home } from "lucide-react";
 import { 
   Sun, 
   Droplets, 
@@ -17,6 +18,33 @@ import {
   Check,
   ArrowRight
 } from 'lucide-react';
+
+const steps = [
+  {
+    number: 1,
+    icon: <Calendar className="h-8 w-8 text-green-600" />,
+    title: "Book a Free Consultation",
+    desc: "Get system sizing, pricing, subsidy, and finance guidance."
+  },
+  {
+    number: 2,
+    icon: <FileText className="h-8 w-8 text-green-600" />,
+    title: "Review Proposal & Confirm Order",
+    desc: "Approve costing and design easily via our platform."
+  },
+  {
+    number: 3,
+    icon: <LineChart className="h-8 w-8 text-green-600" />,
+    title: "Track Project Installation",
+    desc: "End-to-end project management including subsidy and net-metering."
+  },
+  {
+    number: 4,
+    icon: <Home className="h-8 w-8 text-green-600" />,
+    title: "Your Site is Solar Powered",
+    desc: "24×7 support with proactive maintenance via our app."
+  }
+];
 
 const Services = () => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
