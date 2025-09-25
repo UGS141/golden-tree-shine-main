@@ -11,6 +11,8 @@ import {
   ArrowRight 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ServicesSection from "@/components/ServicesSection";
+import React from "react";
 
 const ServicesSection = () => {
   const services = [
@@ -130,6 +132,7 @@ const ServicesSection = () => {
         </div>
       </div>
     </section>
+    <ServicesSection />
   );
 };
 
