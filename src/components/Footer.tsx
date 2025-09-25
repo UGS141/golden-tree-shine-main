@@ -30,7 +30,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-lg font-bold">Golden Tree</h3>
-                <p className="text-sm text-gray-300">Life Sciences</p>
+                <p className="text-sm text-gray-300">Life Spaces</p>
               </div>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
