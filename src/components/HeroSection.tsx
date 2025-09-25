@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield, Zap, Award } from 'lucide-react';
 
-// Import all 7 images
+// Import all 7 images directly from assets
 import heroSolarHome from '@/assets/hero-solar-home.jpg';
 import rooftopSolar from '@/assets/rooftop-solar.jpg';
 import heroSolar from '@/assets/hero-solar.jpg';
-import service1 from '@/assets/service1.jpg';
-import service2 from '@/assets/service2.jpg';
-import service3 from '@/assets/service3.jpg';
-import service4 from '@/assets/service4.jpg';
+import solarWaterHeater from '@/assets/solar-water-heater.jpg';
+import securitySystem from '@/assets/security-system.jpg';
+import solarInverter from '@/assets/solar-inverter.jpg';
+import solarStreetLights from '@/assets/solar-street-lights.jpg';
 
 import { FreeVisitForm } from './FreeVisitForm';
 import { GetQuoteForm } from './GetQuoteForm';
@@ -31,24 +31,24 @@ const slides = [
     description: 'Powering your homes with energy & safety.',
   },
   {
-    image: service1,
+    image: solarWaterHeater,
     title: 'Solar Water Heaters',
     description: 'Save energy with advanced heating systems.',
   },
   {
-    image: service2,
+    image: securitySystem,
     title: 'Security Systems',
     description: 'Smart CCTV and home security installations.',
   },
   {
-    image: service3,
-    title: 'Battery Backup',
-    description: 'Reliable energy storage for uninterrupted power.',
+    image: solarInverter,
+    title: 'Solar Inverters',
+    description: 'Reliable energy storage and smart power management.',
   },
   {
-    image: service4,
-    title: 'Commercial Solar',
-    description: 'Power solutions for businesses and industries.',
+    image: solarStreetLights,
+    title: 'Solar Street Lights',
+    description: 'Sustainable outdoor lighting for streets and communities.',
   },
 ];
 
