@@ -118,7 +118,7 @@ const Navigation = () => {
             />
             <div>
               <h1 className="text-xl font-bold text-primary">Golden Tree</h1>
-              <p className="text-sm text-muted-foreground">Life Sciences</p>
+              <p className="text-sm text-muted-foreground">Life Spaces</p>
             </div>
           </Link>
 
