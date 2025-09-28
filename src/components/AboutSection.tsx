@@ -533,9 +533,8 @@ const AboutSection: React.FC = () => {
             </div>
             <div className="flex gap-3">
               <a href="tel:+917993436520" className="inline-flex items-center bg-white text-emerald-700 px-5 py-3 rounded-lg font-semibold shadow">
-                <Phone className="w-4 h-4 mr-2" /> Call +91 7993436520
+                <Phone className="w-4 h-4 mr-2" /> Call +91 9885848445
               </a>
-              <Button className="bg-white text-emerald-700">Book Free Visit</Button>
             </div>
           </div>
         </div>
