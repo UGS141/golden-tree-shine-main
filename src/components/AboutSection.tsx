@@ -561,7 +561,5 @@ const AboutSection: React.FC = () => {
   </style>
 </section>
 
-  );
-};
 
 export default AboutSection;
