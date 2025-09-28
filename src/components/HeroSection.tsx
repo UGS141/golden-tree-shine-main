@@ -101,25 +101,36 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="btn-accent text-lg px-8 py-4"
-                onClick={() => setShowVisitForm(true)}
+              {/* WhatsApp Button with pre-filled message */}
+              <a
+                href="https://wa.me/9885848445?text=Hello%2C%20I%20would%20like%20to%20book%20a%20free%20site%20visit%20for%20solar%20installation."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto"
               >
-                Book Free Site Visit
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out"
-                onClick={() => setShowQuoteForm(true)}
-              >
-                Get Instant Quote
-              </Button>
+                <Button
+                  size="lg"
+                  className="btn-accent text-lg px-8 py-4 w-full"
+                >
+                  Book Free Site Visit
+                </Button>
+              </a>
 
-              {/* Forms */}
-              <FreeVisitForm open={showVisitForm} onOpenChange={setShowVisitForm} />
-              <GetQuoteForm open={showQuoteForm} onOpenChange={setShowQuoteForm} />
+              {/* Google Form Button */}
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdRdjDw8egRHqtBqGW8h4LFdBUmynSVDOQTWWBky2h53bcjDQ/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto"
+              >
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-yellow-700 border-yellow-500 hover:bg-yellow-100 hover:text-yellow-900 text-lg font-semibold px-8 py-4 shadow-lg transition duration-300 ease-in-out w-full"
+                >
+                  Get Instant Quote
+                </Button>
+              </a>
 
               <ArrowRight className="ml-2 h-5 w-5" />
             </div>
