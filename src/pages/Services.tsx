@@ -57,7 +57,7 @@ const Services = () => {
   const services = [
     {
       icon: Sun,
-      title: 'Solar Rooftop Installation',
+      title: 'Solar Rooftop',
       description: 'Complete solar panel installation with grid-tie inverters for maximum energy savings.',
       features: ['25-year warranty', 'Net metering support', 'Government subsidies', 'EMI options'],
       popular: true,
