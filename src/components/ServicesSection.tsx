@@ -120,19 +120,7 @@ const ServicesSection = () => {
             );
           })}
         </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <Link to="/services">
-            <Button size="lg" className="btn-primary text-lg px-8 py-4">
-              View All Services
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </section>
-   {/* Process Section */}
+        
       <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
@@ -164,7 +152,18 @@ const ServicesSection = () => {
         </div>
       </div>
     </section>
-     
+
+        {/* CTA Section */}
+        <div className="text-center">
+          <Link to="/services">
+            <Button size="lg" className="btn-primary text-lg px-8 py-4">
+              View All Services
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 };
 
