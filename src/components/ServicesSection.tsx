@@ -132,7 +132,39 @@ const ServicesSection = () => {
         </div>
       </div>
     </section>
-    <ServicesSection />
+   {/* Process Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl font-bold mb-4">
+            Choose Solar in <span className="text-green-600">4 Easy Steps</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Simple, transparent, and professional service delivery
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-8">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow p-6 border border-gray-200 animate-fade-in"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              <div className="absolute -top-4 left-6 bg-green-600 text-white font-bold w-8 h-8 flex items-center justify-center rounded-full shadow-md">
+                {step.number}
+              </div>
+              <div className="flex flex-col items-start mt-6">
+                {step.icon}
+                <h3 className="text-lg font-bold mt-4">{step.title}</h3>
+                <p className="text-muted-foreground mt-2">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+     
   );
 };
 
