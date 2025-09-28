@@ -336,11 +336,19 @@ const AboutSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="mt-4">
-                    <Button className="w-full bg-emerald-700 text-white">Schedule Free Site Visit</Button>
-                    <div className="text-xs text-gray-500 mt-2">No obligation — personalized assessment after on-site visit</div>
-                  </div>
-                </div>
+                <div className="mt-4">
+                   <Link
+                     to="https://docs.google.com/forms/d/e/1FAIpQLSdRdjDw8egRHqtBqGW8h4LFdBUmynSVDOQTWWBky2h53bcjDQ/viewform"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                  <Button className="w-full bg-emerald-700 text-white">
+                   Schedule Free Site Visit
+                  </Button>
+                  </Link>
+                  <div className="text-xs text-gray-500 mt-2">
+                     No obligation — personalized assessment after on-site visit
+                 </div>
               </div>
 
               {/* cost breakdown */}
